@@ -3,23 +3,21 @@
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-sudo apt-get install -y git
-
 #install go
-if [[ -z "$GOPATH" ]];then
-    echo "Installing Golang"
-	wget https://go.dev/dl/go1.20.3.linux-amd64.tar.gz
-    sudo tar -xvf go1.20.3.linux-amd64.tar.gz
-    sudo mv go /usr/local
-    export GOROOT=/usr/local/go
-    export GOPATH=$HOME/go
-    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-    echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
-    echo 'export GOPATH=$HOME/go'	>> ~/.bash_profile			
-    echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile	
-    source ~/.bash_profile
-    sleep 1
-fi
+# if [[ -z "{$GOPATH}" ]];then
+#     echo "Installing Golang"
+# 	wget https://go.dev/dl/go1.20.3.linux-amd64.tar.gz
+#     sudo tar -xvf go1.20.3.linux-amd64.tar.gz
+#     sudo mv go /usr/local
+#     export GOROOT=/usr/local/go
+#     export GOPATH=$HOME/go
+#     export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+#     echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
+#     echo 'export GOPATH=$HOME/go'	>> ~/.bash_profile			
+#     echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile	
+#     source ~/.bash_profile
+#     sleep 1
+# fi
 
 
 #create a tools folder in ~/
@@ -29,7 +27,15 @@ cd ~/tools/
 
 #install aquatone
 echo "Installing Aquatone"
-go get github.com/michenriksen/aquatone
+wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip -q
+unzip -q aquatone_linux_amd64_1.7.0.zip -d aquatone
+rm aquatone_linux_amd64_1.7.0.zip
+echo "done"
+
+
+#install chromium
+echo "Installing chromium"
+sudo apt install chromium
 echo "done"
 
 
@@ -51,7 +57,7 @@ echo "done"
 
 #install assetfinder
 echo "installing assetfinder"
-go get -u github.com/tomnomnom/assetfinder
+go install github.com/tomnomnom/assetfinder@latest
 cd ~/tools/
 echo "done"
 
@@ -65,7 +71,8 @@ echo "done"
 
 #install httprobe
 echo "installing httprobe"
-go get -u github.com/tomnomnom/httprobe 
+go install github.com/tomnomnom/httprobe@latest
+cd ~/tools/
 echo "done"
 
 
